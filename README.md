@@ -1,5 +1,7 @@
 ## 🛠️ Getting Started (Frontend)
 
+* Just some quick setup instructions, feel free to make any changes yall feel are necessary.
+
 ### 1. Clone the Repository
 
 ```bash
