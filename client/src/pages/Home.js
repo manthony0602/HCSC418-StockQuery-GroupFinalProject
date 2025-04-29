@@ -18,6 +18,31 @@ function Home() {
     dividends: '1.5% with 5% annual growth',
   });
 
+  const handleAddToFavorites = async () => {
+    const userID = 'exampleUserId'; // will replace with the actual user ID 
+
+    const stockDara = {
+      symbol,
+      name: 'Apple Inc.',
+      industry: 'Technology',
+      pe: mockData.peRatio,
+      growth: mockData.growthRate,
+      userId: userId,
+
+    };
+
+    try {
+      await addStockToFavorites(stockData);
+
+      alert('Stock added to favorites!');
+    } catch (error) {
+      alert('Failed to add stock to favorites.');
+    }
+
+  };
+
+    
+
   return (
     <div
       style={{
