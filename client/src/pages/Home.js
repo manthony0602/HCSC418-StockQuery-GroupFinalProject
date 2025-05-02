@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import StockSearch from '../components/StockSearch';
 import StockMetrics from '../components/StockMetrics';
 import PriceChart from '../components/PriceChart';
+import { supabase } from '.../supabaseClient';
+
+
+
 
 function Home() {
   const [symbol, setSymbol] = useState('AAPL');
@@ -18,6 +22,7 @@ function Home() {
     dividends: '1.5% with 5% annual growth',
   });
 
+<<<<<<< HEAD
   const handleAddToFavorites = async () => {
     const userID = 'exampleUserId'; // will replace with the actual user ID 
 
@@ -42,6 +47,40 @@ function Home() {
   };
 
     
+=======
+const addToFavorites = async () => {
+    try {
+      const userId = 'demo-user'; // Replace with actual user ID if using auth
+
+      const { error } = await supabase
+        .from('favorite_stocks')
+        .insert([
+          {
+            symbol: symbol,
+            industry: 'Tech', // hardcoded for now
+            user_id: userId,
+            current_price: mockData.currentPrice,
+            pe_ratio: mockData.peRatio,
+            growth_rate: mockData.growthRate,
+            high_per_year: mockData.high,
+            low_per_year: mockData.low,
+            fifty_two_week_high: mockData.fiftyTwoWeekHigh,
+            fifty_two_week_low: mockData.fiftyTwoWeekLow,
+            dividends: mockData.dividends,
+            growth_over_pe: mockData.growthOverPE,
+          },
+        ]);
+
+      if (error) throw error;
+      alert('Stock added to favorites!');
+    } catch (error) {
+      console.error('Error adding stock to favorites:', error.message);
+      alert('Failed to add stock.');
+    }
+  };
+
+  
+>>>>>>> efbfc55f4fcea80c08244cf9f6fb30b876a30818
 
   return (
     <div

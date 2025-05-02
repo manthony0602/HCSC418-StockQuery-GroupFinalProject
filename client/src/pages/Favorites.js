@@ -3,6 +3,30 @@ import FavoriteCard from '../components/FavoriteCard';
 
 function Favorites() {
   const [favorites] = useState([]); // test with empty array to see empty message
+  const [industyrFilter, setIndustryFilter] = useState('');
+
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      const { data, error } = await supabase
+        .from('favorite_stocks')
+        .select('*')
+
+      if (error) {
+        console.error('Error fetching favorites:', error);
+      } else {
+        setFavorites(data);
+      }
+
+    };
+    
+    fetchFavorites();
+  }, []);
+
+
+  const filteredFavorites = favorites.filter((fav) => 
+    fav.industry?.toLowerCase().includes(industryFilter.toLowerCase())
+
+    );
 
   return (
     <div
@@ -43,7 +67,13 @@ function Favorites() {
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {favorites.map((fav, index) => (
-            <FavoriteCard key={index} data={fav} />
+            <FavoriteCard key={index} data={{
+              name: fav.symbol,
+              industry: fav.industry,
+              pe: fav.pe_ratio,
+              growth: fav.growth_rate,
+              growthOverPE: fav.growth_over_pe,
+            }} />
           ))}
         </div>
       )}
