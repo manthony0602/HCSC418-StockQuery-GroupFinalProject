@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import StockSearch from '../components/StockSearch';
 import StockMetrics from '../components/StockMetrics';
 import PriceChart from '../components/PriceChart';
-import { supabase } from '../supabaseClient'; // <-- fixed import
+import { supabase } from '../supabaseClient';
 
 function Home() {
   const [symbol, setSymbol] = useState('AAPL');
@@ -98,7 +98,7 @@ function Home() {
           }}
           onMouseOver={(e) => (e.target.style.backgroundColor = '#0056b3')}
           onMouseOut={(e) => (e.target.style.backgroundColor = '#007bff')}
-          onClick={addToFavorites} // <-- connected the button
+          onClick={addToFavorites}
         >
           ➕ Add to Favorites
         </button>
