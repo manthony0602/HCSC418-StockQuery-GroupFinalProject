@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import StockSearch from '../components/StockSearch';
 import StockMetrics from '../components/StockMetrics';
 import PriceChart from '../components/PriceChart';
-import { supabase } from '../supabaseClient';
+import { supabase } from './supabaseClient';  // Correct import
 
 function Home() {
   const [symbol, setSymbol] = useState('AAPL');
