@@ -6,6 +6,7 @@ import { supabase } from '../supabaseClient';
 
 function Home() {
   const [symbol, setSymbol] = useState('AAPL');
+  const [industry, setIndustry] = useState('');
   const [mockData] = useState({
     currentPrice: 142.3,
     priceHistory: [120, 130, 125, 140, 150],
@@ -28,7 +29,7 @@ function Home() {
         .insert([
           {
             symbol: symbol,
-            industry: 'Tech', // hardcoded for now
+            industry: industry || 'Tech', // hardcoded for now
             user_id: userId,
             current_price: mockData.currentPrice,
             pe_ratio: mockData.peRatio,
@@ -49,6 +50,11 @@ function Home() {
       alert('Failed to add stock.');
     }
   };
+
+  const handleIndustryChange = (event) => {
+    setIndustry(event.target.value);
+  };
+  
 
   return (
     <div
@@ -83,6 +89,28 @@ function Home() {
         <StockSearch onSearch={setSymbol} />
         <StockMetrics data={mockData} />
         <PriceChart data={mockData.priceHistory} />
+
+         {/* Dropdown for industry selection */}
+        <select
+          style={{
+            width: '100%',
+            padding: '0.75rem',
+            margin: '1rem 0',
+            border: '1px solid #ccc',
+            borderRadius: '6px',
+          }}
+          value={industry}
+          onChange={handleIndustryChange}
+        >
+          <option value="">Select Industry</option>
+          <option value="Tech">Tech</option>
+          <option value="Healthcare">Healthcare</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Auto">Auto</option>
+          {/* Add more industries here */}
+        </select>
+
+        
         <button
           style={{
             marginTop: '1.5rem',
