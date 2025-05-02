@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 function FavoriteCard({ data }) {
@@ -26,10 +27,12 @@ function FavoriteCard({ data }) {
       }
     >
       <h2 style={{ fontSize: '1.25rem', margin: 0 }}>{data.name}</h2>
+{data.industry && (
       <p style={{ margin: 0, opacity: 0.7 }}>
         <span style={labelStyle}>Industry:</span>
         <span style={valueStyle}>{data.industry}</span>
-      </p>
+      </p>  
+  )}
       <div
         style={{
           display: 'flex',

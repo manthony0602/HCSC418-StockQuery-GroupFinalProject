@@ -1,32 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // ✅ Added useEffect import
+import { supabase } from '../supabaseClient'; // ✅ Make sure Supabase is imported
 import FavoriteCard from '../components/FavoriteCard';
 
 function Favorites() {
-  const [favorites] = useState([]); // test with empty array to see empty message
-  const [industyrFilter, setIndustryFilter] = useState('');
+  const [favorites, setFavorites] = useState([]); // ✅ Set function added
+  const [industryFilter, setIndustryFilter] = useState(''); // ✅ Fixed typo: 'industyrFilter' to 'industryFilter'
 
   useEffect(() => {
     const fetchFavorites = async () => {
       const { data, error } = await supabase
         .from('favorite_stocks')
-        .select('*')
+        .select('*'); // ✅ Fetches all favorite stocks including industry
 
       if (error) {
         console.error('Error fetching favorites:', error);
       } else {
-        setFavorites(data);
+        setFavorites(data); // ✅ Save data to state
       }
-
     };
-    
+
     fetchFavorites();
   }, []);
 
-
-  const filteredFavorites = favorites.filter((fav) => 
-    fav.industry?.toLowerCase().includes(industryFilter.toLowerCase())
-
-    );
+  const filteredFavorites = favorites.filter((fav) =>
+    fav.industry?.toLowerCase().includes(industryFilter.toLowerCase()) // ✅ Filters by industry
+  );
 
   return (
     <div
@@ -50,6 +48,8 @@ function Favorites() {
 
       <input
         placeholder="Filter by industry (e.g. Tech)"
+        value={industryFilter} // ✅ Bind to state
+        onChange={(e) => setIndustryFilter(e.target.value)} // ✅ Update filter
         style={{
           width: '100%',
           padding: '0.75rem',
@@ -60,20 +60,23 @@ function Favorites() {
         }}
       />
 
-      {favorites.length === 0 ? (
+      {filteredFavorites.length === 0 ? ( // ✅ Use filteredFavorites here
         <p style={{ textAlign: 'center', color: '#888' }}>
           No favorites yet. Add some from the Home page!
         </p>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {favorites.map((fav, index) => (
-            <FavoriteCard key={index} data={{
-              name: fav.symbol,
-              industry: fav.industry,
-              pe: fav.pe_ratio,
-              growth: fav.growth_rate,
-              growthOverPE: fav.growth_over_pe,
-            }} />
+          {filteredFavorites.map((fav, index) => ( // ✅ Use filtered list here
+            <FavoriteCard
+              key={index}
+              data={{
+                name: fav.symbol,
+                industry: fav.industry,
+                pe: fav.pe_ratio,
+                growth: fav.growth_rate,
+                growthOverPE: fav.growth_over_pe,
+              }}
+            />
           ))}
         </div>
       )}
@@ -82,3 +85,4 @@ function Favorites() {
 }
 
 export default Favorites;
+
