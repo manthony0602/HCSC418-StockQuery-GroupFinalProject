@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import StockSearch from '../components/StockSearch';
 import StockMetrics from '../components/StockMetrics';
 import PriceChart from '../components/PriceChart';
-import { supabase } from './supabaseClient';
-
-
-
+import { supabase } from './supabaseClient';  // Correct import
 
 function Home() {
   const [symbol, setSymbol] = useState('AAPL');
@@ -22,7 +19,7 @@ function Home() {
     dividends: '1.5% with 5% annual growth',
   });
 
-const addToFavorites = async () => {
+  const addToFavorites = async () => {
     try {
       const userId = 'demo-user'; // Replace with actual user ID if using auth
 
@@ -52,8 +49,6 @@ const addToFavorites = async () => {
       alert('Failed to add stock.');
     }
   };
-
-  
 
   return (
     <div
@@ -103,6 +98,7 @@ const addToFavorites = async () => {
           }}
           onMouseOver={(e) => (e.target.style.backgroundColor = '#0056b3')}
           onMouseOut={(e) => (e.target.style.backgroundColor = '#007bff')}
+          onClick={addToFavorites}
         >
           ➕ Add to Favorites
         </button>
