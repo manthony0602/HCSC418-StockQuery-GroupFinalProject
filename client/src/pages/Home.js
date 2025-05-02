@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import StockSearch from '../components/StockSearch';
 import StockMetrics from '../components/StockMetrics';
 import PriceChart from '../components/PriceChart';
-import { supabase } from '.../supabaseClient';
-
-
-
+import { supabase } from '../supabaseClient';
 
 function Home() {
   const [symbol, setSymbol] = useState('AAPL');
@@ -22,33 +19,7 @@ function Home() {
     dividends: '1.5% with 5% annual growth',
   });
 
-<<<<<<< HEAD
-  const handleAddToFavorites = async () => {
-    const userID = 'exampleUserId'; // will replace with the actual user ID 
-
-    const stockDara = {
-      symbol,
-      name: 'Apple Inc.',
-      industry: 'Technology',
-      pe: mockData.peRatio,
-      growth: mockData.growthRate,
-      userId: userId,
-
-    };
-
-    try {
-      await addStockToFavorites(stockData);
-
-      alert('Stock added to favorites!');
-    } catch (error) {
-      alert('Failed to add stock to favorites.');
-    }
-
-  };
-
-    
-=======
-const addToFavorites = async () => {
+  const addToFavorites = async () => {
     try {
       const userId = 'demo-user'; // Replace with actual user ID if using auth
 
@@ -78,9 +49,6 @@ const addToFavorites = async () => {
       alert('Failed to add stock.');
     }
   };
-
-  
->>>>>>> efbfc55f4fcea80c08244cf9f6fb30b876a30818
 
   return (
     <div
@@ -130,6 +98,7 @@ const addToFavorites = async () => {
           }}
           onMouseOver={(e) => (e.target.style.backgroundColor = '#0056b3')}
           onMouseOut={(e) => (e.target.style.backgroundColor = '#007bff')}
+          onClick={addToFavorites}
         >
           ➕ Add to Favorites
         </button>
